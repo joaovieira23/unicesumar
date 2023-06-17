@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { TouchableOpacity, View, Dimensions } from 'react-native';
 import Card from '../Card';
 import Text from '../Text';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import TextInput from '../TextInput';
 
 type SubjectsProps = {
     qtdSubjects: number;
@@ -14,9 +16,16 @@ type SubjectsProps = {
 export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: SubjectsProps) {
   const screenWidth = Dimensions.get('window').width;
   const itemWidth = screenWidth / 3;
+  const refRBSheet = useRef<RBSheet>(null);
+
+  const openSheet = () => {
+    refRBSheet.current?.open();
+  };
+
 
   return (
-      <TouchableOpacity style={{ width: itemWidth, padding: 8 }}>
+    <>
+      <TouchableOpacity onPress={openSheet} style={{ width: itemWidth, padding: 8 }}>
             <Card style={{
                 backgroundColor: color,
             }}>
@@ -33,5 +42,31 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
                 </View>
             </Card>
         </TouchableOpacity>
+
+        {/*
+          // @ts-ignore */}
+        <RBSheet
+            ref={refRBSheet}
+            closeOnDragDown={true}
+            closeOnPressMask={false}
+            customStyles={{
+            wrapper: {
+                backgroundColor: 'transparent',
+            },
+            draggableIcon: {
+                backgroundColor: '#000',
+            },
+            }}
+        >
+            <View style={{ padding: 8 }}>
+                <TextInput
+                    editable={false}
+                    value={'abc'}
+                    label="Pesquisar"
+                    onChangeText={() => {}}
+                />
+            </View>
+      </RBSheet>
+    </>
   );
 }

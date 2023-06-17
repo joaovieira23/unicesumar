@@ -88,7 +88,7 @@ export const BottomSheet = ({
           },
         ]}>
         {/*
-          // @ts-ignore */}
+              // @ts-ignore */}
         <PanGestureHandler onGestureEvent={onGesture} onEnded={onGestureEnd}>
           <View
             style={[
