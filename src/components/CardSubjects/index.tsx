@@ -1,10 +1,13 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useRef } from 'react';
-import { TouchableOpacity, View, Dimensions } from 'react-native';
+import { TouchableOpacity, View, Dimensions, FlatList } from 'react-native';
 import Card from '../Card';
 import Text from '../Text';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import TextInput from '../TextInput';
+import { ListItemSubjects } from '../ListItemSubjects';
+import { CARDS_CONTENT } from '../../seeds/cards-content';
 
 type SubjectsProps = {
     qtdSubjects: number;
@@ -21,6 +24,18 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
   const openSheet = () => {
     refRBSheet.current?.open();
   };
+
+  const ListEmpty = () => (
+    <>
+      <Text
+        style={{
+          marginTop: 64,
+          textAlign: 'center',
+        }}>
+        Não há informações nessa seção
+      </Text>
+    </>
+  );
 
 
   return (
@@ -48,6 +63,7 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
         <RBSheet
             ref={refRBSheet}
             closeOnDragDown={true}
+            height={440}
             closeOnPressMask={false}
             customStyles={{
             wrapper: {
@@ -65,6 +81,18 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
                     label="Pesquisar"
                     onChangeText={() => {}}
                 />
+                <FlatList
+                    keyExtractor={item => item?.id}
+                    data={CARDS_CONTENT}
+                    renderItem={({item}) => (
+                        <ListItemSubjects
+                            title={item.title}
+                            minutes={item.yearModule}
+                            onPress={() => {}}
+                        />
+                    )}
+                    ListEmptyComponent={<ListEmpty />}
+                    />
             </View>
       </RBSheet>
     </>
