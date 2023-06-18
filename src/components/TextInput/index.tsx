@@ -96,7 +96,7 @@ function TextInput(props: CustomTextInputProps) {
           borderColor: props.error
             ? '#F44336'
             : focused
-            ? '#FCAE00'
+            ? '#4081ec'
             : !focused || !editable
             ? props.inactiveBorderColor || 'rgba(0,0,0,0.6)'
             : props.tintColor || '#4081ec',

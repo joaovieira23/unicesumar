@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { TouchableOpacity, View, Dimensions, FlatList } from 'react-native';
 import Card from '../Card';
 import Text from '../Text';
@@ -20,6 +20,9 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
   const screenWidth = Dimensions.get('window').width;
   const itemWidth = screenWidth / 3;
   const refRBSheet = useRef<RBSheet>(null);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const [filteredData, setFilteredData] = useState(CARDS_CONTENT);
 
   const openSheet = () => {
     refRBSheet.current?.open();
@@ -36,6 +39,15 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
       </Text>
     </>
   );
+
+  const handleSearch = (text: string) => {
+    setSearchTerm(text);
+
+    const filteredItems = CARDS_CONTENT.filter((item) =>
+      item.title.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
 
 
   return (
@@ -76,14 +88,15 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
         >
             <View style={{ padding: 8 }}>
                 <TextInput
-                    editable={false}
-                    value={'abc'}
                     label="Pesquisar"
-                    onChangeText={() => {}}
+                    value={searchTerm}
+                    onChangeText={handleSearch}
+                    underlineColorAndroid="transparent"
+                    autoFocus
                 />
                 <FlatList
                     keyExtractor={item => item?.id}
-                    data={CARDS_CONTENT}
+                    data={filteredData}
                     renderItem={({item}) => (
                         <ListItemSubjects
                             title={item.title}
