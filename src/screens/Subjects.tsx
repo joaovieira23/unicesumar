@@ -1,5 +1,6 @@
 import React from 'react';
 import { SafeAreaView, View } from 'react-native';
+import { CardCEP } from '../components/CardCEP';
 import { CardSubjects } from '../components/CardSubjects';
 import Text from '../components/Text';
 import { CARDS_INFO } from '../seeds/cards-info';
@@ -16,6 +17,7 @@ export function Subjects() {
             {CARDS_INFO.map((card) => (
                 <CardSubjects key={card.id} color={card.color} qtdSubjects={card.qtdSubjects} titleCard={card.title} iconName={card.iconName} />
             ))}
+            <CardCEP />
         </View>
     </SafeAreaView>
   );

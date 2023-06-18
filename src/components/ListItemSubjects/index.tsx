@@ -4,12 +4,15 @@ import Text from '../Text';
 
 interface PropsListItemSubjects {
   title: string;
-  minutes: string;
+  yearModule: string;
+  start: string;
   onPress: () => void;
 }
 
 export const ListItemSubjects = ({
   title,
+  start,
+  yearModule,
   onPress,
 }: PropsListItemSubjects) => {
   return (
@@ -45,6 +48,24 @@ export const ListItemSubjects = ({
               fontSize: 14,
               color: '#000000',
             }}>{title}</Text>
+            <View style={{ display: 'flex', flexDirection: 'row'}}>
+              <Text
+                style={{
+                  marginTop: 4,
+                  fontSize: 12,
+                  color: '#A9ABB1',
+                }}>
+                Início: {start}
+              </Text>
+              <Text
+                style={{
+                  marginTop: 4,
+                  fontSize: 12,
+                  color: '#A9ABB1',
+                }}>
+                {` - Ano/Módulo: ${yearModule}`}
+              </Text>
+            </View>
           </View>
         </View>
 

@@ -27,11 +27,4 @@ export const CARDS_INFO = [
         qtdSubjects: 5,
         color: '#0e0e7d',
     },
-    {
-        id: '5',
-        title: 'Curso de Proficiência',
-        iconName: 'book',
-        qtdSubjects: 0,
-        color: '#993399',
-    },
 ];

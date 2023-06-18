@@ -82,7 +82,7 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
                 backgroundColor: 'transparent',
             },
             draggableIcon: {
-                backgroundColor: '#000',
+                backgroundColor: '#000000',
             },
             }}
         >
@@ -100,7 +100,8 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
                     renderItem={({item}) => (
                         <ListItemSubjects
                             title={item.title}
-                            minutes={item.yearModule}
+                            yearModule={item.yearModule}
+                            start={item.start}
                             onPress={() => {}}
                         />
                     )}
