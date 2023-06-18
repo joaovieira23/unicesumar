@@ -96,7 +96,7 @@ export function CardCEP() {
 
                 {isLoading &&
                   Array.from(Array(6).keys()).map((_, index) => (
-                    <View style={{ marginTop: 38 }}>
+                    <View key={index} style={{ marginTop: 38 }}>
                       <CardCEPSkeleton key={index} />
                     </View>
                 ))}
