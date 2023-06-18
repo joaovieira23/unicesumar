@@ -7,6 +7,7 @@ import { Card } from '../Card';
 import api from '../../services/api';
 import TextButton from '../Button';
 import Text from '../Text';
+import { CardCEPSkeleton } from '../CardCEPSkeleton';
 
 type GetZipCodeProps = {
   cep: string;
@@ -92,6 +93,13 @@ export function CardCEP() {
                 />
 
                 <TextButton  label="Consultar CEP" onPress={handleFetchZipCodeData} />
+
+                {isLoading &&
+                  Array.from(Array(6).keys()).map((_, index) => (
+                    <View style={{ marginTop: 38 }}>
+                      <CardCEPSkeleton key={index} />
+                    </View>
+                ))}
 
                 {resultZipCode && !isLoading &&
                   <View>
