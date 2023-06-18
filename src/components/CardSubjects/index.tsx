@@ -1,13 +1,12 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useRef, useState } from 'react';
-import { TouchableOpacity, View, Dimensions, FlatList } from 'react-native';
-import Card from '../Card';
+import { View, Dimensions, FlatList } from 'react-native';
 import Text from '../Text';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import TextInput from '../TextInput';
 import { ListItemSubjects } from '../ListItemSubjects';
 import { CARDS_CONTENT } from '../../seeds/cards-content';
+import { Card } from '../Card';
 
 type SubjectsProps = {
     qtdSubjects: number;
@@ -52,23 +51,14 @@ export function CardSubjects({ qtdSubjects, color, titleCard, iconName }: Subjec
 
   return (
     <>
-      <TouchableOpacity onPress={openSheet} style={{ width: itemWidth, padding: 8 }}>
-            <Card style={{
-                backgroundColor: color,
-            }}>
-               <View style={{ justifyContent: 'center', backgroundColor: '#FFFFFF', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 8,  borderBottomEndRadius: 4, borderBottomStartRadius: 4, marginLeft: 'auto', marginRight: 'auto' }}>
-                    <Text style={{ textAlign: 'center', fontFamily: 'Poppins-Bold', fontSize: 10 }}>{`${qtdSubjects} disciplina(s)`}</Text>
-                </View>
-                <View style={{  height: 112, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Icon name={iconName} size={28} color="#FFFFFF" />
-                    <Text style={{
-                        color: '#FFFFFF',
-                        marginTop: 8,
-                        textAlign: 'center',
-                    }}>{titleCard}</Text>
-                </View>
-            </Card>
-        </TouchableOpacity>
+        <Card
+          onPress={openSheet}
+          itemWidth={itemWidth}
+          color={color}
+          iconName={iconName}
+          qtdSubjects={qtdSubjects}
+          titleCard={titleCard}
+        />
 
         {/*
           // @ts-ignore */}

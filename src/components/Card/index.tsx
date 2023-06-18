@@ -1,53 +1,35 @@
-import React, { useMemo } from 'react';
-import { View } from 'react-native';
-import Text, { TextProps } from '../Text';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import BaseCard from '../BaseCard';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-function Card(props: View['props'] & { flat?: boolean }) {
-	const shadow = useMemo(() => {
-		if (props.flat) {
-			return {};
-		} else {
-			return {
-				shadowColor: '#000000',
-				shadowOffset: { width: 0, height: 2 },
-				shadowOpacity: 0.15,
-				shadowRadius: 20,
-				elevation: 5,
-				borderRadius: 8,
-			};
-		}
-	}, [props.flat]);
-
-	const viewStyle = Array.isArray(props.style)
-		? [
-				{
-					backgroundColor: '#FFFFFF',
-					...shadow,
-				},
-				...props.style,
-	]
-		: ([
-				{
-					backgroundColor: '#FFFFFF',
-					...shadow,
-				},
-				props.style,
-	] as View['props']['style']);
-
-	return <View style={viewStyle}>{props.children}</View>;
+type CardProps = {
+    onPress: () => void;
+    itemWidth: number;
+    color: string;
+    iconName: string;
+    titleCard: string;
+    qtdSubjects: number;
 }
 
-Card.Title = (props: TextProps) => {
-	const textStyle = [
-		{ fontSize: 20, fontWeight: '500' },
-		...(Array.isArray(props.style) ? props.style : [props.style]),
-	] as TextProps['style'];
-
-	return (
-		<Text enfase style={textStyle}>
-			{props.children}
-		</Text>
-	);
-};
-
-export default Card;
+export function Card({ color, iconName, itemWidth, onPress, titleCard, qtdSubjects }: CardProps) {
+    return (
+        <TouchableOpacity onPress={onPress} style={{ width: itemWidth, padding: 8 }}>
+            <BaseCard style={{
+                backgroundColor: color,
+            }}>
+               <View style={{ justifyContent: 'center', backgroundColor: '#FFFFFF', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 8,  borderBottomEndRadius: 4, borderBottomStartRadius: 4, marginLeft: 'auto', marginRight: 'auto' }}>
+                    <Text style={{ textAlign: 'center', fontFamily: 'Poppins-Bold', fontSize: 10 }}>{`${qtdSubjects} disciplina(s)`}</Text>
+                </View>
+                <View style={{  height: 112, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Icon name={iconName} size={28} color="#FFFFFF" />
+                    <Text style={{
+                        color: '#FFFFFF',
+                        marginTop: 8,
+                        textAlign: 'center',
+                    }}>{titleCard}</Text>
+                </View>
+            </BaseCard>
+        </TouchableOpacity>
+    );
+}
